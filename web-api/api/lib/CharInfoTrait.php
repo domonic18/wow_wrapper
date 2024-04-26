@@ -217,7 +217,7 @@
             $hours = $totaltime%24;
             $totaltime = intval($totaltime/24);
             $days = $totaltime;
-            return "游戏内总时间: $days 天. $hours 小时. $min 分钟.";
+            return "$days 天 $hours 小时 $min 分钟";
         }
 
         private function Inventory(){

@@ -89,7 +89,7 @@
     });
   });
 
-  function OnlineIcon(race, gender) {
+  function RaceIcon(race, gender) {
     var iconPath = '';
 
     switch (race) {
@@ -156,11 +156,12 @@
     table.clear().draw();
 
     characters.forEach(function(character) {
-      var raceImage = `<img src="${OnlineIcon(character.Race, character.Gender)}" class="race-image">`;
+      var raceImage = `<img src="${RaceIcon(character.Race, character.Gender)}" class="race-image">`;
+      var classImage = `<img src="class/${character.Class}.gif" class="class-image">`;
       table.row.add([
         character.Name,
         character.Level,
-        character.Class,
+        classImage,
         raceImage,
         character.TotalSpentTime
       ]).draw();
