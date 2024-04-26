@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>封号列表</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/element-plus/lib/theme-chalk/index.css">
+</head>
+<body>
+<div id="app">
+	<el-input v-model="searchText" placeholder="输入用户名搜索" @input="fetchBanList"></el-input>
+	<el-table :data="filteredBanList" v-if="filteredBanList.length > 0">
+		<el-table-column label="用户名" prop="username"></el-table-column>
+		<el-table-column label="IP地址" prop="last_ip"></el-table-column>
+		<el-table-column label="封号日期" prop="bandate"></el-table-column>
+		<el-table-column label="解封日期" prop="unbandate"></el-table-column>
+		<el-table-column label="封号原因" prop="banreason"></el-table-column>
+	</el-table>
+	<div v-else>暂无数据</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@3"></script>
+<script src="https://cdn.jsdelivr.net/npm/element-plus"></script>
+<script>
+	const { createApp, ref } = Vue;
+	const app = createApp({
+		setup() {
+			const searchText = ref('');
+			const banList = ref([]);
+
+			const fetchBanList = () => {
+				fetch('index.php?_key=ffc312f882fbeeb51504483ee8c691a2&_url=recent_ban_list') // 替换为您的实际 API 端点
+						.then(response => response.json())
+						.then(data => {
+							if (data.success) {
+								banList.value = data.data;
+								updateFilteredBanList();
+							} else {
+								console.error('Failed to fetch ban list');
+							}
+						})
+						.catch(error => {
+							console.error('Error fetching ban list:', error);
+						});
+			};
+
+			const filteredBanList = ref([]);
+			const updateFilteredBanList = () => {
+				filteredBanList.value = banList.value.filter(item => item.username.toLowerCase().includes(searchText.value.toLowerCase()));
+			};
+
+			fetchBanList();
+
+			return {
+				searchText,
+				banList,
+				filteredBanList,
+				fetchBanList,
+				updateFilteredBanList
+			};
+		}
+	});
+
+	app.use(ElementPlus);
+	app.mount('#app');
+</script>
+</body>
+</html>
