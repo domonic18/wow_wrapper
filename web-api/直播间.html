@@ -1,0 +1,96 @@
+<div style="margin-bottom: 5px;">
+  <button class="toggle-btn" onclick="toggle('live_1')">
+    <span class="toggle-text">BL-牛老大</span>
+    <span class="live-tag">LIVE</span>
+  </button>
+  <button class="toggle-btn" onclick="toggle('live_2')">
+    <span class="toggle-text">BL-泷泽</span>
+    <span class="live-tag">LIVE</span>
+  </button>
+  <button class="toggle-btn" onclick="toggle('live_3')">
+    <span class="toggle-text">LM-洒洒水</span>
+    <span class="live-tag">LIVE</span>
+  </button>
+</div>
+
+<div id="live_1" style="margin-bottom: 5px;"></div>
+
+<div id="live_2" style="margin-bottom: 5px;"></div>
+
+<div id="live_3" style="margin-bottom: 5px;"></div>
+
+<script>
+  var currentLiveId = null; // 用于记录当前正在播放的直播的 ID
+
+  function toggle(id) {
+    var element = document.getElementById(id);
+    var live_1 = document.getElementById('live_1');
+    var live_2 = document.getElementById('live_2');
+    var live_3 = document.getElementById('live_3');
+
+    // 停止当前正在播放的直播
+    if (currentLiveId) {
+      var currentLive = document.getElementById(currentLiveId);
+      currentLive.innerHTML = ''; // 清空 iframe 内容
+    }
+
+    // 根据按钮点击的直播 ID，动态创建对应的 iframe
+    switch (id ) { 
+      case 'live_1':
+        live_1.innerHTML = '<iframe width="100%" height="600" frameborder="0" scrolling="no" src="https://www.huya.com/28686613"></iframe>';
+        currentLiveId = 'live_1';
+        break; 
+      case 'live_2':
+        live_2.innerHTML = '<iframe width="100%" height="600" frameborder="0" scrolling="no" src="https://www.huya.com/18513042"></iframe>';
+        currentLiveId = 'live_2';
+        break; 
+      case 'live_3':
+        live_3.innerHTML = '<iframe style="width: 100%; height: 400px;" src="https://www.bilibili.com/blackboard/live/live-activity-player.html?cid=27480025&quality=0" frameborder="no" framespacing="0" scrolling="no" allow="autoplay; encrypted-media" allowfullscreen="true"></iframe>';
+        currentLiveId = 'live_3';
+        break; 
+      default:
+        live_1.innerHTML = '<iframe width="100%" height="600" frameborder="0" scrolling="no" src="https://www.huya.com/28686613"></iframe>';
+        currentLiveId = 'live_1';
+        break;
+    }
+
+  }
+</script>
+
+<style>
+  .toggle-btn {
+    padding: 12px 18px;
+    border: none;
+    border-right: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+    background-color: #E8D060;
+    color: #333;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .toggle-btn:last-child {
+    margin-right: 0;
+    border-right: 1px solid #E8D060;
+  }
+  
+  .toggle-btn.active {
+    background-color: #E8D060;
+    color: white;
+  }
+  
+  .live-tag {
+    background-color: #333333943;
+    color: #dc5252;
+    padding: 4px;
+    font-size: 12px;
+    border-radius: 2px;
+    margin-left: 6px;
+  }
+  
+  iframe {
+    margin-top: 5px;
+  }
+</style>
