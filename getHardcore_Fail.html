@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>HardcoreFail</title>
+  <style>
+    table {
+      border-collapse: collapse;
+    }
+
+    th, td {
+      border: 1px solid black;
+      padding: 8px;
+    }
+
+    .race-image {
+      width: 16px;
+      height: 16px;
+    }
+    .pagination {
+      margin-top: 20px;
+    }
+
+    .pagination a {
+      display: inline-block;
+      padding: 8px;
+      text-decoration: none;
+      border: 1px solid #ccc;
+      margin-right: 5px;
+    }
+
+    .pagination a.active {
+      //background-color: #ccc;
+    }
+  </style>
+</head>
+<body>
+<table id="characterTable">
+  <thead>
+  <tr>
+    <th>名字</th>
+    <th>阵亡级别</th>
+    <th>职业</th>
+    <th>种族</th>
+    <th>游戏时间</th>
+  </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+<div class="pagination"></div>
+<script>
+  var charactersPerPage = 50; // 每页显示的角色数量
+  var currentPage = 1; // 当前页码
+
+  // 发起 AJAX 请求获取数据
+  function getData(page) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "http://lokta.cn/web-api/launcher/index.php?_key=ffc312f882fbeeb51504483ee8c691a2&_url=hardcore_Fail", true);
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        var responseData = JSON.parse(xhr.responseText);
+        var totalPages = Math.ceil(responseData.length / charactersPerPage);
+        displayCharacters(responseData, totalPages);
+      }
+    };
+    xhr.send();
+  }
+
+  // 在表格中显示角色信息
+  function displayCharacters(characters, totalPages) {
+    var tableBody = document.querySelector("#characterTable tbody");
+    tableBody.innerHTML = "";
+
+    var startIndex = (currentPage - 1) * charactersPerPage;
+    var endIndex = startIndex + charactersPerPage;
+    var currentCharacters = characters.slice(startIndex, endIndex);
+
+    for (var i = 0; i < currentCharacters.length; i++) {
+      var character = currentCharacters[i];
+      var row = document.createElement("tr");
+
+      var nameCell = document.createElement("td");
+      nameCell.textContent = character.Name;
+      row.appendChild(nameCell);
+
+      var levelCell = document.createElement("td");
+      levelCell.textContent = character.Level;
+      row.appendChild(levelCell);
+
+      var classCell = document.createElement("td");
+      classCell.textContent = character.Class;
+      row.appendChild(classCell);
+
+      var genderCell = document.createElement("td");
+      genderCell.textContent = character.Gender === 0 ? "Male" : "Female";
+      row.appendChild(genderCell);
+
+      var raceCell = document.createElement("td");
+      var raceImage = document.createElement("img");
+      raceImage.src = character.Race;
+      raceImage.alt = character.Race;
+      raceImage.className = "race-image";
+      raceCell.appendChild(raceImage);
+      row.appendChild(raceCell);
+
+      var timeCell = document.createElement("td");
+      timeCell.textContent = character.TotalSpentTime;
+      row.appendChild(timeCell);
+
+      tableBody.appendChild(row);
+    }
+
+    displayPagination(totalPages);
+  }
+
+  // 显示分页按钮
+  function displayPagination(totalPages) {
+    var paginationDiv = document.querySelector(".pagination");
+    paginationDiv.innerHTML = "";
+
+    for (var i = 1; i <= totalPages; i++) {
+      var pageLink = document.createElement("a");
+      pageLink.textContent = i;
+      pageLink.href = "#";
+      pageLink.addEventListener("click", function() {
+        currentPage = parseInt(this.textContent);
+        getData(currentPage);
+      });
+
+      if (i === currentPage) {
+        pageLink.classList.add("active");
+      }
+
+      paginationDiv.appendChild(pageLink);
+    }
+  }
+
+  // 初始加载第一页的数据
+  getData(currentPage);
+
+</script>
+</body>
+</html>
