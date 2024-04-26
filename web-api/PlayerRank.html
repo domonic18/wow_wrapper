@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>PlayerHardcoreRank</title>
+  <!-- 引入必要的库文件 -->
+  <link rel="stylesheet" href="lib/bootstrap-5.0.2-dist/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="lib/DataTables/datatables.min.css">
+  <style>
+    .race-image {
+      width: 16px;
+      height: 16px;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <ul class="nav nav-tabs justify-content-center" id="player_hardcore_rank_nav" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link" id="hardcore_completed_60-tab" data-bs-toggle="tab" href="#hardcore_completed_60" role="tab">硬核达成(60级)霸者榜</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="hardcore_completed_70-tab" data-bs-toggle="tab" href="#hardcore_completed_70" role="tab">硬核达成(70级)霸者榜</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="hardcore_fail-tab" data-bs-toggle="tab" href="#hardcore_fail" role="tab">硬核失败阵亡榜</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="hardcore_incompleted-tab" data-bs-toggle="tab" href="#hardcore_incompleted" role="tab">硬核实时奋进榜</a>
+    </li>
+  </ul>
+
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade" id="hardcore_completed_60" role="tabpanel">
+      <!-- 为每个Tab面板添加独立的<table>元素 -->
+      <table id="table-hardcore_completed-60" class="display dataTable">
+        <!-- 表格标题和内容 -->
+      </table>
+    </div>
+    <div class="tab-pane fade" id="hardcore_completed_70" role="tabpanel">
+      <table id="table-hardcore_completed-70" class="display dataTable">
+      </table>
+    </div>
+    <div class="tab-pane fade" id="hardcore_fail" role="tabpanel">
+      <table id="table-hardcore_fail" class="display dataTable">
+      </table>
+    </div>
+    <div class="tab-pane fade" id="hardcore_incompleted" role="tabpanel">
+      <table id="table-hardcore_incompleted" class="display dataTable">
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- 引入必要的JS文件 -->
+<script src="lib/jquery-3.6.0.min.js"></script>
+<script src="lib/bootstrap-5.0.2-dist/js/bootstrap.min.js"></script>
+<script src="lib/DataTables/datatables.min.js"></script>
+
+<script>
+  $(document).ready(function() {
+    // 初始化DataTable
+    function initDataTable(tabId) {
+      $(`#${tabId}`).find('table').DataTable({
+        destroy: true, // 销毁之前的DataTable实例
+        columns: [
+          { title: '名字', className: 'text-left' },
+          { title: '级别', className: 'text-left' },
+          { title: '职业', className: 'text-left' },
+          { title: '种族', className: 'text-left' },
+          { title: '游戏时间', className: 'text-left' }
+        ],
+        pageLength: 50,
+        ordering: false
+      });
+    }
+
+    // 默认显示“硬核失败”选项卡，并初始化DataTable
+    var defaultTab = 'hardcore_fail';
+    $(`#player_hardcore_rank_nav a[href="#${defaultTab}"]`).tab('show');
+    initDataTable(defaultTab);
+    loadDataAndPaginate(defaultTab);
+
+    // 监听Tab切换事件，并重新初始化DataTable
+    $('a[data-bs-toggle="tab"]').on('shown.bs.tab', function(e) {
+      var activeTab = $(e.target).attr('href').substring(1);
+      initDataTable(activeTab);
+      loadDataAndPaginate(activeTab);
+    });
+  });
+
+  function OnlineIcon(race, gender) {
+    var iconPath = '';
+
+    switch (race) {
+      case 1:
+        iconPath = (gender === 0) ? 'race/Ui-charactercreate-races_human-male.png' : 'race/Ui-charactercreate-races_human-female.png';
+        break;
+      case 2:
+        iconPath = (gender === 0) ? 'race/Ui-charactercreate-races_orc-male.png' : 'race/Ui-charactercreate-races_orc-female.png';
+        break;
+      case 3:
+        iconPath = (gender === 0) ? 'race/Ui-charactercreate-races_dwarf-male.png' : 'race/Ui-charactercreate-races_dwarf-female.png';
+        break;
+      case 4:
+        iconPath = (gender === 0) ? 'race/Ui-charactercreate-races_nightelf-male.png' : 'race/Ui-charactercreate-races_nightelf-female.png';
+        break;
+      case 5:
+        iconPath = (gender === 0) ? 'race/Ui-charactercreate-races_undead-male.png' : 'race/Ui-charactercreate-races_undead-female.png';
+        break;
+      case 6:
+        iconPath = (gender === 0) ? 'race/Ui-charactercreate-races_tauren-male.png' : 'race/Ui-charactercreate-races_tauren-female.png';
+        break;
+      case 7:
+        iconPath = (gender === 0) ? 'race/Ui-charactercreate-races_gnome-male.png' : 'race/Ui-charactercreate-races_gnome-female.png';
+        break;
+      case 8:
+        iconPath = (gender === 0) ? 'race/Ui-charactercreate-races_troll-male.png' : 'race/Ui-charactercreate-races_troll-female.png';
+        break;
+      case 10:
+        iconPath = (gender === 0) ? 'race/Ui-charactercreate-races_bloodelf-male.png' : 'race/Ui-charactercreate-races_bloodelf-female.png';
+        break;
+      case 11:
+        iconPath = (gender === 0) ? 'race/Ui-charactercreate-races_draenei-male.png' : 'race/Ui-charactercreate-races_draenei-female.png';
+        break;
+      case 22:
+        iconPath = (gender === 0) ? 'race/Ui-charactercreate-races_worgen-male.png' : 'race/Ui-charactercreate-races_worgen-female.png';
+        break;
+      case 9:
+        iconPath = (gender === 0) ? 'race/Ui-charactercreate-races_goblin-male.png' : 'race/Ui-charactercreate-races_goblin-female.png';
+        break;
+      case 24:
+        iconPath = (gender === 0) ? 'race/Ui-charactercreate-races_pandaren-male.png' : 'race/Ui-charactercreate-races_pandaren-female.png';
+        break;
+    }
+
+    return iconPath;
+  }
+
+  function loadDataAndPaginate(tab) {
+    $.ajax({
+      url: `index.php?_key=ffc312f882fbeeb51504483ee8c691a2&_url=${tab}`,
+      method: 'GET',
+      success: function(response) {
+        var characters = response.data;
+        displayCharacters(characters, tab);
+      },
+      error: function() {
+        console.error('Failed to fetch data');
+      }
+    });
+  }
+
+  function displayCharacters(characters, tab) {
+    var table = $(`#${tab}`).find('table').DataTable();
+    table.clear().draw();
+
+    characters.forEach(function(character) {
+      var raceImage = `<img src="${OnlineIcon(character.Race, character.Gender)}" class="race-image">`;
+      table.row.add([
+        character.Name,
+        character.Level,
+        character.Class,
+        raceImage,
+        character.TotalSpentTime
+      ]).draw();
+    });
+
+  }
+</script>
+
+</body>
+</html>

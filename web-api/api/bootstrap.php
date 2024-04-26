@@ -21,7 +21,9 @@ $routes = [
     'count_online' => 'getCountOnline',
     'recent_ban_list' => 'getRecentBanlist',
     'hardcore_fail' => 'getHardcore_Fail',
-    'hardcore_completed' => 'getHardcore_Completed',
+    'hardcore_completed_60' => ['method' => 'getHardcore_Completed', 'param' => 60],
+    'hardcore_completed_70' => ['method' => 'getHardcore_Completed', 'param' => 70],
+    'hardcore_completed_80' => ['method' => 'getHardcore_Completed', 'param' => 80],
     'hardcore_incompleted' => 'getHardcore_Incomplete',
     'top_achievement' => 'getTopAchievementPlayers',
     'recent_achieve' => 'getRecentAchievements',
@@ -31,8 +33,16 @@ $routes = [
 
 // 检查路由规则并调用相应的处理方法
 if (isset($routes[$get])) {
-    $method = $routes[$get];
-    $api->$method();
+    $route = $routes[$get];
+
+    // 判断路由配置是否包含参数
+    if (is_array($route) && isset($route['method'])) {
+        $method = $route['method'];
+        $param = $route['param'] ?? null;
+        $api->$method($param); // 调用方法并传递参数
+    } else {
+        $api->$route();
+    }
 } else {
     header('HTTP/1.1 404 Not Found');
     header('Status: 404 Not Found');

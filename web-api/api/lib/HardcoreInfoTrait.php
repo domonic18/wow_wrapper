@@ -71,7 +71,7 @@
             return array(
                 'Guid' => $player['guid'],
                 'Name' => $this->checkAndReplacePlayerName($player['name']),
-                'Race' => self::$_conf['site_url'] . $this->OnlineIcon((int)$player['race'], (int)$player['gender']),
+                'Race' => (int)$player['race'],
                 'Class' => $class['class'],
                 'Gender' => ((int)$player['gender']),
                 'Level' => $player['character_level'],
@@ -192,10 +192,8 @@
                 return array();
             }
         }
-        public function getHardcore_Completed() {
+        public function getHardcore_Completed($level=60) {
             try {
-                // 从 URL 获取 level 参数
-                $level = isset($_GET['level']) ? (int)$_GET['level'] : null;
 
                 $cacheKey = 'hardcore_challenge_completed_' . $level;
 
