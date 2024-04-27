@@ -11,6 +11,15 @@
       width: 16px;
       height: 16px;
     }
+    .class-image {
+      width: 16px;
+      height: 16px;
+    }
+    .refresh-text {
+      text-align: center;
+      margin-top: 9px;
+      color: #777;
+    }
   </style>
 </head>
 <body>
@@ -52,6 +61,7 @@
     <div class="tab-pane fade" id="hardcore_incompleted" role="tabpanel">
       <table id="table-hardcore_incompleted" class="display dataTable">
       </table>
+      <div class="refresh-text">排行榜数据每5分钟刷新一次</div>
     </div>
   </div>
 </div>
@@ -155,7 +165,7 @@
 
     characters.forEach(function(character) {
       var raceImage = `<img src="${RaceIcon(character.Race, character.Gender)}" class="race-image">`;
-      var classImage = `<img src="class/${character.Class}.gif" class="class-image">`;
+      var classImage = `<img src="class/hd${character.Class}.png" class="class-image">`;
       table.row.add([
         character.Name,
         character.Level,
