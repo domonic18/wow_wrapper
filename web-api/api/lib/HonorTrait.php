@@ -18,14 +18,13 @@
                 FROM 
                     characters AS c
                 ORDER BY totalHonorPoints DESC
-                LIMIT 50
+                LIMIT 200
             ";
 
             $result = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
             return $result;
         }
-
         protected function processTopHonorPlayersData($topPlayersData) {
             if ($topPlayersData !== false && count($topPlayersData) > 0) {
                 $topPlayers = array();
@@ -47,7 +46,6 @@
                 return array();
             }
         }
-
         public function getTopHonorPlayers() {
             try {
                 $cacheKey = 'top_honor_players';

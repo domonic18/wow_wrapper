@@ -1,7 +1,7 @@
 <?php
     trait AchievementTrait
     {
-        /*获取成就点数TOP 50玩家名称的接口*/
+        /*获取成就点数TOP 200玩家名称的接口*/
         protected function fetchTopAchievementPlayersFromMySQL() {
             $db = $this->Connect(self::$_conf['characters']);
 
@@ -23,7 +23,7 @@
                     acore_world.`achievement_dbc` AS a ON ca.achievement = a.ID
                 GROUP BY c.guid
                 ORDER BY total_achieve_points DESC
-                LIMIT 50
+                LIMIT 200
             ";
 
             $result = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
@@ -89,7 +89,7 @@
                 INNER JOIN 
                     acore_world.achievement_dbc AS ad ON ca.achievement = ad.ID
                 ORDER BY ca.date DESC
-                LIMIT 50
+                LIMIT 100
             ";
 
             $result = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);

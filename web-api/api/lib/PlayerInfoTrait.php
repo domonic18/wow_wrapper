@@ -2,7 +2,7 @@
     trait PlayerInfoTrait
     {
 
-        /*获取金币最多的TOP50玩家信息的接口*/
+        /*获取金币最多的TOP 200玩家信息的接口*/
         protected function fetchTopGoldPlayers(){
             try {
                 $db = $this->Connect(self::$_conf['characters']);
@@ -13,7 +13,7 @@
                 `characters` 
             ORDER BY 
                 `money` DESC
-            LIMIT 50
+            LIMIT 200
         ";
                 $top_players = $db->query($sql)->fetchAll();
 
@@ -57,8 +57,7 @@
             echo json_encode($response);
         }
 
-
-        /*获取游戏时长最长的TOP50玩家信息的接口*/
+        /*获取游戏时长最长的TOP 200玩家信息的接口*/
         protected function fetchTopPlaytimePlayers(){
             try {
                 $db = $this->Connect(self::$_conf['characters']);
@@ -69,7 +68,7 @@
                 `characters` 
             ORDER BY 
                 `totaltime` DESC
-            LIMIT 50
+            LIMIT 200
         ";
                 $top_players = $db->query($sql)->fetchAll();
 

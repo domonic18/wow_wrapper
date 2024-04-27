@@ -232,6 +232,7 @@
                     INNER JOIN 
                         `hardcore_challenge_failed` AS f ON c.guid = f.character_guid
                     ORDER BY f.id DESC
+                    LIMIT 500
                 ")->fetchAll(PDO::FETCH_ASSOC);
 
                 return $failed_list;
