@@ -52,9 +52,9 @@
     var silver = Math.floor((totalGold % 10000) / 100);
     var copper = totalGold % 100;
 
-    var goldIcon = `<img src="icons/money-gold.gif" class="class-image">`;
-    var silverIcon = `<img src="icons/money-silver.gif" class="class-image">`;
-    var copperIcon = `<img src="icons/money-copper.gif" class="class-image">`;
+    var goldIcon = `<img src="icons/money-gold.gif" class="money-image">`;
+    var silverIcon = `<img src="icons/money-silver.gif" class="money-image">`;
+    var copperIcon = `<img src="icons/money-copper.gif" class="money-image">`;
 
     return gold + goldIcon + silver + silverIcon + copper + copperIcon;
   }
