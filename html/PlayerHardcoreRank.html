@@ -148,7 +148,7 @@
   });
   function loadDataAndPaginate(tab) {
     $.ajax({
-      url: `index.php?_key=ffc312f882fbeeb51504483ee8c691a2&_url=${tab}`,
+      url: `../web-api/index.php?_key=ffc312f882fbeeb51504483ee8c691a2&_url=${tab}`,
       method: 'GET',
       success: function(response) {
         var characters = response.data;
@@ -165,7 +165,7 @@
 
     characters.forEach(function(character) {
       var raceImage = `<img src="${RaceIcon(character.Race, character.Gender)}" class="race-image">`;
-      var classImage = `<img src="class/hd${character.Class}.png" class="class-image">`;
+      var classImage = `<img src="icons/class/hd${character.Class}.png" class="class-image">`;
       table.row.add([
         character.Name,
         character.Level,

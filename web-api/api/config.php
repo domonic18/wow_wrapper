@@ -2,7 +2,7 @@
 return array(
     'host' => '127.0.0.1',
     'user' => 'db_admin',
-    'pass' => 'test',
+    'pass' => 'Doudou20151026!',
     'port' => '3306',
     'auth' => 'acore_auth',
     'news' => 'news',
