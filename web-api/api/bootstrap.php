@@ -28,6 +28,7 @@ $routes = [
     'top_achievement' => 'getTopAchievementPlayers',
     'recent_achieve' => 'getRecentAchievements',
     'top_honor' => 'getTopHonorPlayers',
+    'top_gold' => 'getTopGoldPlayers',
     'top_playtime' => 'getTopPlaytimePlayers'
 ];
 

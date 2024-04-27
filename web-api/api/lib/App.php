@@ -10,6 +10,7 @@ class App {
     use CharInfoTrait;
     use AchievementTrait;
     use HonorTrait;
+    use PlayerInfoTrait;
 //    use NewsInfoTrait;
 
 

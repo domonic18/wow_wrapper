@@ -34,13 +34,12 @@
             $topPlayers = array();
 
             foreach ($playersData as $key => $player) {
-                $class = $this->ClassState($player['class']);
                 $topPlayers[$key] = array(
                     'Guid' => $player['guid'],
                     'Name' => $player['name'],
-                    'Race' => self::$_conf['site_url'] . $this->OnlineIcon((int)$player['race'], (int)$player['gender']),
-                    'Class' => $class['class'],
-                    'Gender' => ((int)$player['gender']),
+                    'Race' => (int)$player['race'],
+                    'Class' => (int)$player['class'],
+                    'Gender' => (int)$player['gender'],
                     'Level' => $player['level'],
                     'Totaltime' => $this->totalTime($player['totaltime']),
                     'Total_achieve_points' => $player['total_achieve_points']
@@ -102,13 +101,12 @@
             $recentAchievements = array();
 
             foreach ($playersData as $key => $player) {
-                $class = $this->ClassState($player['class']);
                 $recentAchievements[$key] = array(
                     'Guid' => $player['guid'],
                     'Name' => $player['name'],
-                    'Race' => self::$_conf['site_url'] . $this->OnlineIcon((int)$player['race'], (int)$player['gender']),
-                    'Class' => $class['class'],
-                    'Gender' => ((int)$player['gender']),
+                    'Race' => (int)$player['race'],
+                    'Class' => (int)$player['class'],
+                    'Gender' => (int)$player['gender'],
                     'Level' => $player['level'],
                     'Achievement_description' => $player['achievement_description'],
                     'Achievement_date' => $player['achievement_date']

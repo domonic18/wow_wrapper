@@ -8,10 +8,12 @@
             $sql = "
                 SELECT 
                     c.guid, 
-                    c.name, 
+                    c.name,
                     c.race, 
                     c.class, 
-                    c.gender, 
+                    c.gender,
+                    c.level,
+                    c.totaltime,
                     c.totalHonorPoints
                 FROM 
                     characters AS c
@@ -28,13 +30,14 @@
             if ($topPlayersData !== false && count($topPlayersData) > 0) {
                 $topPlayers = array();
                 foreach ($topPlayersData as $key => $player) {
-                    $class = $this->ClassState($player['class']);
                     $topPlayers[$key] = array(
                         'Guid' => $player['guid'],
                         'Name' => $this->checkAndReplacePlayerName($player['name']),
-                        'Race' => self::$_conf['site_url'] . $this->OnlineIcon((int)$player['race'], (int)$player['gender']),
-                        'Class' => $class['class'],
-                        'Gender' => ((int)$player['gender']),
+                        'Race' => (int)$player['race'],
+                        'Class' => (int)$player['class'],
+                        'Gender' => (int)$player['gender'],
+                        'Level' => $player['level'],
+                        'Totaltime' => $this->totalTime($player['totaltime']),
                         'TotalHonorPoints' => $player['totalHonorPoints']
                     );
                 }
