@@ -28,6 +28,10 @@
     <li class="nav-item">
       <a class="nav-link" id="hardcore_incompleted-tab" data-bs-toggle="tab" href="#hardcore_incompleted" role="tab">硬核实时奋进榜</a>
     </li>
+    <!-- 添加更多排行榜链接 -->
+    <li class="nav-item ms-auto">
+      <a class="nav-link" href="PlayerInfoRank.html">更多排行榜</a>
+    </li>
   </ul>
 
   <div class="tab-content" id="myTabContent">
@@ -56,22 +60,66 @@
 <script src="lib/jquery-3.6.0.min.js"></script>
 <script src="lib/bootstrap-5.0.2-dist/js/bootstrap.min.js"></script>
 <script src="lib/DataTables/datatables.min.js"></script>
+<script src="lib/common.js"></script>
 
 <script>
   $(document).ready(function() {
     // 初始化DataTable
     function initDataTable(tabId) {
+      var columns = [];
+      var title = '';
+
+      switch (tabId) {
+        case 'hardcore_completed_60':
+        case 'hardcore_completed_70':
+          title = '硬核达成级别';
+          break;
+        case 'hardcore_fail':
+          title = '阵亡级别';
+          break;
+        case 'hardcore_incompleted':
+          title = '当前级别';
+          break;
+        default:
+          title = '级别';
+          break;
+      }
+
+      columns.push({ title: '名字', className: 'text-left' });
+      columns.push({ title: title, className: 'text-left' });
+      columns.push({ title: '职业', className: 'text-left' });
+      columns.push({ title: '种族', className: 'text-left' });
+      columns.push({ title: '游戏时间', className: 'text-left' });
+
       $(`#${tabId}`).find('table').DataTable({
         destroy: true, // 销毁之前的DataTable实例
-        columns: [
-          { title: '名字', className: 'text-left' },
-          { title: '级别', className: 'text-left' },
-          { title: '职业', className: 'text-left' },
-          { title: '种族', className: 'text-left' },
-          { title: '游戏时间', className: 'text-left' }
-        ],
+        columns: columns,
         pageLength: 50,
-        ordering: false
+        ordering: false,
+        language: {
+          "sProcessing": "处理中...",
+          "sLengthMenu": "显示 _MENU_ 项结果",
+          "sZeroRecords": "没有匹配结果",
+          "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+          "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
+          "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+          "sInfoPostFix": "",
+          "sSearch": "搜索:",
+          "sUrl": "",
+          "sEmptyTable": "表中数据为空",
+          "sLoadingRecords": "载入中...",
+          "sInfoThousands": ",",
+          "oPaginate": {
+            "sFirst": "首页",
+            "sPrevious": "上页",
+            "sNext": "下页",
+            "sLast": "末页"
+          },
+          "oAria": {
+            "sSortAscending": ": 以升序排列此列",
+            "sSortDescending": ": 以降序排列此列"
+          }
+        }
       });
     }
 
@@ -88,55 +136,6 @@
       loadDataAndPaginate(activeTab);
     });
   });
-
-  function RaceIcon(race, gender) {
-    var iconPath = '';
-
-    switch (race) {
-      case 1:
-        iconPath = (gender === 0) ? 'race/Ui-charactercreate-races_human-male.png' : 'race/Ui-charactercreate-races_human-female.png';
-        break;
-      case 2:
-        iconPath = (gender === 0) ? 'race/Ui-charactercreate-races_orc-male.png' : 'race/Ui-charactercreate-races_orc-female.png';
-        break;
-      case 3:
-        iconPath = (gender === 0) ? 'race/Ui-charactercreate-races_dwarf-male.png' : 'race/Ui-charactercreate-races_dwarf-female.png';
-        break;
-      case 4:
-        iconPath = (gender === 0) ? 'race/Ui-charactercreate-races_nightelf-male.png' : 'race/Ui-charactercreate-races_nightelf-female.png';
-        break;
-      case 5:
-        iconPath = (gender === 0) ? 'race/Ui-charactercreate-races_undead-male.png' : 'race/Ui-charactercreate-races_undead-female.png';
-        break;
-      case 6:
-        iconPath = (gender === 0) ? 'race/Ui-charactercreate-races_tauren-male.png' : 'race/Ui-charactercreate-races_tauren-female.png';
-        break;
-      case 7:
-        iconPath = (gender === 0) ? 'race/Ui-charactercreate-races_gnome-male.png' : 'race/Ui-charactercreate-races_gnome-female.png';
-        break;
-      case 8:
-        iconPath = (gender === 0) ? 'race/Ui-charactercreate-races_troll-male.png' : 'race/Ui-charactercreate-races_troll-female.png';
-        break;
-      case 10:
-        iconPath = (gender === 0) ? 'race/Ui-charactercreate-races_bloodelf-male.png' : 'race/Ui-charactercreate-races_bloodelf-female.png';
-        break;
-      case 11:
-        iconPath = (gender === 0) ? 'race/Ui-charactercreate-races_draenei-male.png' : 'race/Ui-charactercreate-races_draenei-female.png';
-        break;
-      case 22:
-        iconPath = (gender === 0) ? 'race/Ui-charactercreate-races_worgen-male.png' : 'race/Ui-charactercreate-races_worgen-female.png';
-        break;
-      case 9:
-        iconPath = (gender === 0) ? 'race/Ui-charactercreate-races_goblin-male.png' : 'race/Ui-charactercreate-races_goblin-female.png';
-        break;
-      case 24:
-        iconPath = (gender === 0) ? 'race/Ui-charactercreate-races_pandaren-male.png' : 'race/Ui-charactercreate-races_pandaren-female.png';
-        break;
-    }
-
-    return iconPath;
-  }
-
   function loadDataAndPaginate(tab) {
     $.ajax({
       url: `index.php?_key=ffc312f882fbeeb51504483ee8c691a2&_url=${tab}`,
@@ -150,7 +149,6 @@
       }
     });
   }
-
   function displayCharacters(characters, tab) {
     var table = $(`#${tab}`).find('table').DataTable();
     table.clear().draw();
