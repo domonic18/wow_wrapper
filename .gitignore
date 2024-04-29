@@ -1,1 +1,9 @@
 /.idea
+.DS_Store
+logs/nginx/access.log
+logs/nginx/error.log
+logs/supervisor/php-stderr---supervisor-60Kmuw.log
+logs/supervisor/php-stdout---supervisor-5UnfpO.log
+logs/supervisor/supervisord.log
+logs/supervisor/nginx-stderr---supervisor-_3UI_h.log
+logs/supervisor/nginx-stdout---supervisor-HKFakE.log

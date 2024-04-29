@@ -1,0 +1,45 @@
+version: "3.8"
+services:
+  web-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: wow_web
+    volumes:
+      - ./srv:/var/www/html
+      - ./nginx:/etc/nginx/conf.d
+      - ./php:/usr/local/etc/php/conf.d
+      - ./php-fpm:/usr/local/etc/php-fpm.d
+      - ./supervisor:/etc/supervisor/conf.d
+      - ./logs/nginx:/var/log/nginx
+      - ./logs/php:/var/log/php
+      - ./logs/supervisor/:/var/log/supervisor
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8081" ]
+      interval: 2s
+      timeout: 3s
+      retries: 3
+      start_period: 40s
+    depends_on:
+      - redis-server
+    networks:
+      - backend
+      - frontend
+    ports:
+      - '8081:80'
+  redis-server:
+    image: redis:latest
+    container_name: redis
+    command: redis-server /usr/local/etc/redis/redis.conf
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 1s
+      timeout: 3s
+      retries: 30
+    volumes:
+      - ./redis:/usr/local/etc/redis
+    networks:
+      - backend
+networks:
+  backend:
+  frontend:
