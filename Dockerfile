@@ -1,8 +1,8 @@
 FROM php:8.0.0-fpm
 
 LABEL maintainer="Deadwalk" \
-      website="https://17aitech.com" \
-      postbox="zgdmemail@gmail.com" \
+      website="http://lokta.cn" \
+      postbox="lnh_wow@126.com" \
       version="1.0" \
       description="The image is based on the integration environment of nginx, php, mysql and redis."
 
