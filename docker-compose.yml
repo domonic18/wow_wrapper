@@ -25,6 +25,7 @@ services:
     networks:
       - backend
       - frontend
+      - local-shared-net
     ports:
       - '8081:80'
   redis-server:
@@ -43,3 +44,6 @@ services:
 networks:
   backend:
   frontend:
+  local-shared-net:
+    name: local-shared-net
+    driver: bridge
