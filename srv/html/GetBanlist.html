@@ -1,67 +1,160 @@
 <!DOCTYPE html>
-<html>
+<html data-bs-theme="dark">
 <head>
-	<meta charset="utf-8">
-	<title>封号列表</title>
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/element-plus/lib/theme-chalk/index.css">
+  <meta charset="utf-8">
+  <title>封号列表</title>
+  <!-- 引入必要的库文件 -->
+  <link rel="stylesheet" href="lib/bootstrap-5.3.3-dist/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="lib/DataTables/datatables.min.css">
+  <style>
+    /* 添加单元格边框样式 */
+    table.dataTable {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    .race-image {
+      width: 16px;
+      height: 16px;
+    }
+    .class-image {
+      width: 16px;
+      height: 16px;
+    }
+
+    .refresh-text {
+      text-align: center;
+      margin-top: 9px;
+      color: #777;
+    }
+  </style>
 </head>
 <body>
-<div id="app">
-	<el-input v-model="searchText" placeholder="输入用户名搜索" @input="fetchBanList"></el-input>
-	<el-table :data="filteredBanList" v-if="filteredBanList.length > 0">
-		<el-table-column label="用户名" prop="username"></el-table-column>
-		<el-table-column label="IP地址" prop="last_ip"></el-table-column>
-		<el-table-column label="封号日期" prop="bandate"></el-table-column>
-		<el-table-column label="解封日期" prop="unbandate"></el-table-column>
-		<el-table-column label="封号原因" prop="banreason"></el-table-column>
-	</el-table>
-	<div v-else>暂无数据</div>
+<div class="container">
+  <ul class="nav nav-tabs justify-content-center" id="recent_ban_list_nav" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link" id="recent_ban_list-tab" data-bs-toggle="tab" href="#recent_ban_list" role="tab">封号记录</a>
+    </li>
+  </ul>
+
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade" id="recent_ban_list" role="tabpanel">
+      <table id="table-recent_ban_list" class="display dataTable">
+      </table>
+    </div>
+  </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/vue@3"></script>
-<script src="https://cdn.jsdelivr.net/npm/element-plus"></script>
+<!-- 引入必要的JS文件 -->
+<script src="lib/jquery-3.6.0.min.js"></script>
+<script src="lib/bootstrap-5.3.3-dist/js/bootstrap.min.js"></script>
+<script src="lib/DataTables/datatables.min.js"></script>
+<script src="lib/common.js"></script>
+
 <script>
-	const { createApp, ref } = Vue;
-	const app = createApp({
-		setup() {
-			const searchText = ref('');
-			const banList = ref([]);
+  $(document).ready(function() {
+    // 初始化DataTable
+    function initDataTable(tabId) {
+      var columns = [];
+      var title = '';
 
-			const fetchBanList = () => {
-				fetch('index.php?_key=ffc312f882fbeeb51504483ee8c691a2&_url=recent_ban_list') // 替换为您的实际 API 端点
-						.then(response => response.json())
-						.then(data => {
-							if (data.success) {
-								banList.value = data.data;
-								updateFilteredBanList();
-							} else {
-								console.error('Failed to fetch ban list');
-							}
-						})
-						.catch(error => {
-							console.error('Error fetching ban list:', error);
-						});
-			};
+      switch (tabId) {
+        case 'recent_ban_list':
+          columns.push({ title: '用户名', className: 'text-left' });
+          columns.push({ title: 'IP地址', className: 'text-left' });
+          columns.push({ title: '封号原因', className: 'text-left' });
+          columns.push({ title: '封号日期', className: 'text-left' });
+          break;
+        default:
+          title = '点数';
+          columns.push({ title: '名字', className: 'text-left' });
+          columns.push({ title: '级别', className: 'text-left' });
+          columns.push({ title: '职业', className: 'text-left' });
+          columns.push({ title: '种族', className: 'text-left' });
+          if (title !== '') {
+            columns.push({ title: title, className: 'text-left' });
+          }
+          columns.push({ title: '游戏时间', className: 'text-left' });
+          break;
+      }
 
-			const filteredBanList = ref([]);
-			const updateFilteredBanList = () => {
-				filteredBanList.value = banList.value.filter(item => item.username.toLowerCase().includes(searchText.value.toLowerCase()));
-			};
+      $(`#${tabId}`).find('table').DataTable({
+          destroy: true, // 销毁之前的DataTable实例
+          columns: columns,
+          autoWidth: true,
+          pageLength: 50,
+          ordering: false,
+          language: {
+            "sProcessing": "处理中...",
+            "sLengthMenu": "显示 _MENU_ 项结果",
+            "sZeroRecords": "没有匹配结果",
+            "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+            "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
+            "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+            "sInfoPostFix": "",
+            "sSearch": "搜索:",
+            "sUrl": "",
+            "sEmptyTable": "表中数据为空",
+            "sLoadingRecords": "载入中...",
+            "sInfoThousands": ",",
+            "oPaginate": {
+              "sFirst": "首页",
+              "sPrevious": "上页",
+              "sNext": "下页",
+              "sLast": "末页"
+            },
+            "oAria": {
+              "sSortAscending": ": 以升序排列此列",
+              "sSortDescending": ": 以降序排列此列"
+            }
+          }
+        });
+    }
 
-			fetchBanList();
+    var defaultTab = 'recent_ban_list';
+    $(`#recent_ban_list_nav a[href="#${defaultTab}"]`).tab('show');
+    initDataTable(defaultTab);
+    loadDataAndPaginate(defaultTab);
 
-			return {
-				searchText,
-				banList,
-				filteredBanList,
-				fetchBanList,
-				updateFilteredBanList
-			};
-		}
-	});
+    // 监听Tab切换事件，并重新初始化DataTable
+    $('a[data-bs-toggle="tab"]').on('shown.bs.tab', function(e) {
+      var activeTab = $(e.target).attr('href').substring(1);
+      initDataTable(activeTab);
+      loadDataAndPaginate(activeTab);
+    });
+  });
+  function loadDataAndPaginate(tab) {
+    $.ajax({
+      url: `../web-api/index.php?_key=ffc312f882fbeeb51504483ee8c691a2&_url=${tab}`,
+      method: 'GET',
+      success: function(response) {
+        var characters = response.data;
+        displayCharacters(characters, tab);
+      },
+      error: function() {
+        console.error('Failed to fetch data');
+      }
+    });
+  }
+  function displayCharacters(characters, tab) {
+    var table = $(`#${tab}`).find('table').DataTable();
+    table.clear().draw();
 
-	app.use(ElementPlus);
-	app.mount('#app');
+    characters.forEach(function(character) {
+      var rowData = [];
+      switch (tab) {
+        case 'recent_ban_list':
+          rowData = [character.username, character.last_ip,  character.banreason, character.bandate];
+          break;
+        default:
+          rowData = [character.Name, character.Level, classImage, raceImage, character.Totaltime];
+          break;
+      }
+
+      table.row.add(rowData).draw();
+    });
+
+  }
 </script>
+
 </body>
 </html>
