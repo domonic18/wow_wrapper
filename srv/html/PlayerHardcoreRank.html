@@ -1,12 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html data-bs-theme="dark">
 <head>
   <meta charset="utf-8">
   <title>PlayerHardcoreRank</title>
   <!-- 引入必要的库文件 -->
-  <link rel="stylesheet" href="lib/bootstrap-5.0.2-dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="lib/bootstrap-5.3.3-dist/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="lib/DataTables/datatables.min.css">
   <style>
+    /* 添加单元格边框样式 */
+    table.dataTable {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
     .race-image {
       width: 16px;
       height: 16px;
@@ -68,7 +74,7 @@
 
 <!-- 引入必要的JS文件 -->
 <script src="lib/jquery-3.6.0.min.js"></script>
-<script src="lib/bootstrap-5.0.2-dist/js/bootstrap.min.js"></script>
+<script src="lib/bootstrap-5.3.3-dist/js/bootstrap.min.js"></script>
 <script src="lib/DataTables/datatables.min.js"></script>
 <script src="lib/common.js"></script>
 
@@ -104,7 +110,9 @@
       $(`#${tabId}`).find('table').DataTable({
         destroy: true, // 销毁之前的DataTable实例
         columns: columns,
+        autoWidth: true,
         pageLength: 50,
+        display: "cell-border",// 为表格中的单元格添加边框
         ordering: false,
         language: {
           "sProcessing": "处理中...",
@@ -145,6 +153,7 @@
       initDataTable(activeTab);
       loadDataAndPaginate(activeTab);
     });
+
   });
   function loadDataAndPaginate(tab) {
     $.ajax({
