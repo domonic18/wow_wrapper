@@ -16,6 +16,7 @@
     .online-players-title h3 {
       font-size: 18px;
       margin: 0;
+      color: #F1B132; /* 颜色为#F1B132 */
     }
 
     .online-players-title span {
@@ -56,17 +57,31 @@
     .online-players .horde-players .bar {
       background-color: #ff6961;
     }
+
+    .total-players {
+      margin-top: 10px; /* 增加顶部间距 */
+    }
+
+    .online-total-count {
+      font-size: 12px; /* 设置字体大小 */
+      cursor: pointer; /* 鼠标指针样式为手型 */
+    }
+
+    .setting-details {
+      font-size: 9px; /* 设置字体大小为9px */
+      margin-left: 10px; /* 左边距为10px */
+      color: white; /* 设置字体颜色为白色 */
+    }
   </style>
 </head>
 <body>
 <div class="online-players">
   <div class="online-players-title">
     <h3 class="widget-title">阿拉希</h3>
+    <div class="setting-details">
+      <a href="http://lokta.cn/?page_id=135" target="_blank">设置详情</a>
+    </div>
     <span>● 运行中</span>
-  </div>
-  <div class="total-players">
-    <span class="label">总数：</span>
-    <span class="count" id="total-count"></span>
   </div>
   <div class="alliance-players">
     <span class="label">联盟：</span>
@@ -82,21 +97,31 @@
       <div class="bar" id="horde-bar"></div>
     </div>
   </div>
+  <div class="total-players">
+<!--    <span class="label">在线总人数：</span>-->
+    <span>共计 <a href="http://lokta.cn/?page_id=1880" target="_blank" class="online-total-count">0</a> 人在线</span>
+  </div>
 </div>
 
 <script>
   function getCountOnline() {
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", "index.php?_key=ffc312f882fbeeb51504483ee8c691a2&_url=count_online", true);
+    xhr.open("GET", "../web-api/index.php?_key=ffc312f882fbeeb51504483ee8c691a2&_url=count_online", true);
     xhr.onreadystatechange = function () {
       if (xhr.readyState === XMLHttpRequest.DONE) {
         if (xhr.status === 200) {
           var response = JSON.parse(xhr.responseText);
-          document.getElementById("total-count").innerHTML = response.data.total_count;
+          // document.getElementById("total-count").innerHTML = response.data.total_count;
           document.getElementById("alliance-count").innerHTML = response.data.alliance_count;
           document.getElementById("horde-count").innerHTML = response.data.horde_count;
           document.getElementById("alliance-bar").style.width = (response.data.alliance_count / response.data.total_count) * 100 + '%';
           document.getElementById("horde-bar").style.width = (response.data.horde_count / response.data.total_count) * 100 + '%';
+
+          // 获取显示在线总人数的元素
+          var totalCountElement = document.querySelector('.online-total-count');
+
+          // 更新在线总人数并保持格式
+          totalCountElement.innerHTML = '<a href="http://lokta.cn/?page_id=1880" target="_blank" class="online-total-count">' + response.data.total_count + '</a>';
         } else {
           console.log("Error:", xhr.statusText);
         }
