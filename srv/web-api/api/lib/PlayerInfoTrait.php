@@ -124,7 +124,7 @@
                     WHERE 
                         `online` = 1 AND NOT `extra_flags` & 16 
                     ORDER BY 
-                        `name`
+                        `level`
                 ";
                 $online_list = $db->query($sql)->fetchAll();
 
