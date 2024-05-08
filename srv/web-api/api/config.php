@@ -11,9 +11,10 @@ return array(
     'icon_db' => 'icontemplate',
     'site_url' => 'http://localhost/web-api/',
     'wowhead_url_icons' => 'http://wow.zamimg.com/images/wow/icons/large/',
-    'enable_redis' => false,
+    'enable_redis' => true,
     'redis_host' => 'localhost',
     'redis_port' => '6379',
-    'redis_expire_time' => '300'
+    'redis_expire_time' => '300',
+    'redis_password'=> 'abc123.'
 );
 

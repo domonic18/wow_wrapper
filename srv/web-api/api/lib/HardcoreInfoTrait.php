@@ -7,6 +7,7 @@
                 if (extension_loaded('redis')) {
                     $redis = new Redis();
                     $redis->connect(self::$_conf['redis_host'], self::$_conf['redis_port']);
+                    $redis->auth(self::$_conf['redis_password']); // 提供Redis密码进行身份验证
                     return $redis;
                 } else {
                     // Redis 扩展未安装，执行备用逻辑或抛出异常
