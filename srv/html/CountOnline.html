@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html data-bs-theme="dark">
 <head>
   <meta charset="UTF-8">
+  <link rel="stylesheet" href="lib/bootstrap-5.3.3-dist/css/bootstrap.min.css">
   <style>
     .online-players {
-      font-size: 10px;
+      font-size: 12px;
     }
 
     .online-players-title {
@@ -14,7 +15,7 @@
     }
 
     .online-players-title h3 {
-      font-size: 18px;
+      font-size: 16px;
       margin: 0;
       color: #F1B132; /* 颜色为#F1B132 */
     }
@@ -50,6 +51,10 @@
       transition: width 0.5s ease-in-out;
     }
 
+    .label {
+      color: white; /* 设置字体颜色为白色 */
+    }
+
     .online-players .alliance-players .bar {
       background-color: #69a2ff;
     }
@@ -68,7 +73,7 @@
     }
 
     .setting-details {
-      font-size: 9px; /* 设置字体大小为9px */
+      font-size: 12px; /* 设置字体大小为9px */
       margin-left: 10px; /* 左边距为10px */
       color: white; /* 设置字体颜色为白色 */
     }
@@ -102,7 +107,7 @@
     <span>共计 <a href="http://lokta.cn/?page_id=1880" target="_blank" class="online-total-count">0</a> 人在线</span>
   </div>
 </div>
-
+<script src="lib/bootstrap-5.3.3-dist/js/bootstrap.min.js"></script>
 <script>
   function getCountOnline() {
     var xhr = new XMLHttpRequest();
