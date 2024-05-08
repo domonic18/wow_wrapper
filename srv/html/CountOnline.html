@@ -104,7 +104,7 @@
   </div>
   <div class="total-players">
 <!--    <span class="label">在线总人数：</span>-->
-    <span>共计 <a href="http://lokta.cn/?page_id=1880" target="_blank" class="online-total-count">0</a> 人在线</span>
+    <span>共计 <a href="#" target="_blank" class="online-total-count">0</a> 人在线</span>
   </div>
 </div>
 <script src="lib/bootstrap-5.3.3-dist/js/bootstrap.min.js"></script>
@@ -126,7 +126,7 @@
           var totalCountElement = document.querySelector('.online-total-count');
 
           // 更新在线总人数并保持格式
-          totalCountElement.innerHTML = '<a href="http://lokta.cn/?page_id=1880" target="_blank" class="online-total-count">' + response.data.total_count + '</a>';
+          totalCountElement.innerHTML = '<a href="http://lokta.cn/?page_id=1897" target="_blank" class="online-total-count">' + response.data.total_count + '</a>';
         } else {
           console.log("Error:", xhr.statusText);
         }
