@@ -104,7 +104,7 @@
     function groupAchievementsByDate(achievements) {
         var groupedAchievements = {};
         achievements.forEach(function(achievement) {
-            var date = new Date(achievement.Achievement_date);
+            var date = new Date(achievement.achievement_date);
             var formattedDate = formatDate(date);
             if (!groupedAchievements[formattedDate]) {
                 groupedAchievements[formattedDate] = [];
