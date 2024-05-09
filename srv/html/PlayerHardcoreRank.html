@@ -107,6 +107,8 @@
       columns.push({ title: '种族', className: 'text-left' });
       columns.push({ title: '游戏时间', className: 'text-left' });
 
+      $.fn.dataTable.ext.errMode = 'none'; // 禁用所有DataTable的警告对话框
+
       $(`#${tabId}`).find('table').DataTable({
         destroy: true, // 销毁之前的DataTable实例
         columns: columns,
@@ -114,7 +116,9 @@
         pageLength: 50,
         display: "cell-border",// 为表格中的单元格添加边框
         ordering: false,
+        processing: true, // 启用处理指示器
         language: {
+          "processing": "数据加载中，请稍候...", // 自定义加载文本
           "sProcessing": "处理中...",
           "sLengthMenu": "显示 _MENU_ 项结果",
           "sZeroRecords": "没有匹配结果",
@@ -156,34 +160,54 @@
 
   });
   function loadDataAndPaginate(tab) {
-    $.ajax({
-      url: `../web-api/index.php?_key=ffc312f882fbeeb51504483ee8c691a2&_url=${tab}`,
-      method: 'GET',
-      success: function(response) {
-        var characters = response.data;
-        displayCharacters(characters, tab);
-      },
-      error: function() {
-        console.error('Failed to fetch data');
-      }
-    });
+    // 显示处理指示器
+    $(`#${tab}`).find('table').DataTable().processing(true);
+
+    // 模拟 AJAX 请求延迟
+    setTimeout(function() {
+      $.ajax({
+        url: `../web-api/index.php?_key=ffc312f882fbeeb51504483ee8c691a2&_url=${tab}`,
+        method: 'GET',
+        success: function(response) {
+          var characters = response.data;
+          if (!characters || characters.length === 0) {
+            displayError(tab, "数据不存在，请稍后再试");
+          } else {
+            displayCharacters(characters, tab);
+          }
+          // 数据加载完毕后停止处理指示器
+          $(`#${tab}`).find('table').DataTable().processing(false);
+        },
+        error: function() {
+          console.error('Failed to fetch data');
+          displayError(tab, "数据存在异常，请稍后再试");
+          // 数据加载失败时停止处理指示器
+          $(`#${tab}`).find('table').DataTable().processing(false);
+        }
+      });
+    }, 1000); // 模拟1秒延迟
   }
   function displayCharacters(characters, tab) {
     var table = $(`#${tab}`).find('table').DataTable();
     table.clear().draw();
 
     characters.forEach(function(character) {
-      var raceImage = `<img src="${RaceIcon(character.Race, character.Gender)}" class="race-image">`;
-      var classImage = `<img src="icons/class/hd${character.Class}.png" class="class-image">`;
+      var raceImage = `<img src="${RaceIcon(character.race, character.gender)}" class="race-image">`;
+      var classImage = `<img src="icons/class/hd${character.class}.png" class="class-image">`;
       table.row.add([
-        character.Name,
-        character.Level,
+        character.name,
+        character.level,
         classImage,
         raceImage,
-        character.TotalSpentTime
+        character.total_spent_time
       ]).draw();
     });
 
+  }
+  function displayError(tab, message) {
+    var table = $(`#${tab}`).find('table').DataTable();
+    table.clear().draw(); // 清空表格
+    table.row.add([message, "", "", "", "", ""]).draw(); // 添加错误信息行，根据列数调整空字符串数量
   }
 </script>
 

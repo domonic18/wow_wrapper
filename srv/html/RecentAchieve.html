@@ -127,9 +127,9 @@
             timeline.append(dateSeparator);
 
             achievements.forEach(function(achievement) {
-                var time = new Date(achievement.Achievement_date).toLocaleTimeString();
-                var playerInfo = "<span class='player-name'>" + achievement.Name + "</span>(" + achievement.Level + "级)";
-                var achievementDesc = "<span class='achievement-description'>[" + achievement.Achievement_description + "]</span>";
+                var time = new Date(achievement.achievement_date).toLocaleTimeString();
+                var playerInfo = "<span class='player-name'>" + achievement.name + "</span>(" + achievement.level + "级)";
+                var achievementDesc = "<span class='achievement-description'>[" + achievement.achievement_description + "]</span>";
                 var achievementItem = $("<div class='achievement'>").html(time + "  " + playerInfo + "  获得成就  " + achievementDesc);
                 timeline.append(achievementItem);
             });

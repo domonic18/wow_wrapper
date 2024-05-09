@@ -30,14 +30,14 @@
                 $topPlayers = array();
                 foreach ($topPlayersData as $key => $player) {
                     $topPlayers[$key] = array(
-                        'Guid' => $player['guid'],
-                        'Name' => $this->checkAndReplacePlayerName($player['name']),
-                        'Race' => (int)$player['race'],
-                        'Class' => (int)$player['class'],
-                        'Gender' => (int)$player['gender'],
-                        'Level' => $player['level'],
-                        'Totaltime' => $this->totalTime($player['totaltime']),
-                        'TotalHonorPoints' => $player['totalHonorPoints']
+                        'guid' => $player['guid'],
+                        'name' => $this->checkAndReplacePlayerName($player['name']),
+                        'race' => (int)$player['race'],
+                        'class' => (int)$player['class'],
+                        'gender' => (int)$player['gender'],
+                        'level' => $player['level'],
+                        'total_time' => $this->totalTime($player['totaltime']),
+                        'total_honor_points' => $player['totalHonorPoints']
                     );
                 }
 

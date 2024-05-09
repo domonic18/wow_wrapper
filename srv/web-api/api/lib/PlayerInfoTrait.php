@@ -31,14 +31,14 @@
                 if ($top_players_list !== false && count($top_players_list) > 0) {
                     foreach ($top_players_list as $player) {
                         $topPlayers[] =  array(
-                            'Guid' => $player['guid'],
-                            'Name' => $this->checkAndReplacePlayerName($player['name']),
-                            'Race' => (int)$player['race'],
-                            'Class' => (int)$player['class'],
-                            'Gender' => (int)$player['gender'],
-                            'Level' => $player['level'],
-                            'Side' => $this->Fraction((int) $player['race']),
-                            'TotalGold' => (int)$player['money']
+                            'guid' => $player['guid'],
+                            'name' => $this->checkAndReplacePlayerName($player['name']),
+                            'race' => (int)$player['race'],
+                            'class' => (int)$player['class'],
+                            'gender' => (int)$player['gender'],
+                            'level' => $player['level'],
+                            'side' => $this->Fraction((int) $player['race']),
+                            'total_gold' => (int)$player['money']
                         );
                     }
                     $response['success'] = true;
@@ -86,14 +86,14 @@
                 if ($top_players_list !== false && count($top_players_list) > 0) {
                     foreach ($top_players_list as $player) {
                         $topPlayers[] =  array(
-                            'Guid' => $player['guid'],
-                            'Name' => $this->checkAndReplacePlayerName($player['name']),
-                            'Race' => (int)$player['race'],
-                            'Class' => (int)$player['class'],
-                            'Gender' => (int)$player['gender'],
-                            'Level' => $player['level'],
-                            'Side' => $this->Fraction((int) $player['race']),
-                            'TotalSpentTime' => $this->totalTime($player['totaltime'])
+                            'guid' => $player['guid'],
+                            'name' => $this->checkAndReplacePlayerName($player['name']),
+                            'race' => (int)$player['race'],
+                            'class' => (int)$player['class'],
+                            'gender' => (int)$player['gender'],
+                            'level' => $player['level'],
+                            'side' => $this->Fraction((int) $player['race']),
+                            'total_spent_time' => $this->totalTime($player['totaltime'])
                         );
                     }
                     $response['success'] = true;
@@ -141,13 +141,13 @@
                 if ($online_list !== false && count($online_list) > 0) {
                     foreach ($online_list as $player) {
                         $onlinePlayers[] =  array(
-                            'Guid' => $player['guid'],
-                            'Name' => $this->checkAndReplacePlayerName($player['name']),
-                            'Race' => (int)$player['race'],
-                            'Class' => (int)$player['class'],
-                            'Gender' => (int)$player['gender'],
-                            'Level' => $player['level'],
-                            'Side' => $this->Fraction((int) $player['race'])
+                            'guid' => $player['guid'],
+                            'name' => $this->checkAndReplacePlayerName($player['name']),
+                            'race' => (int)$player['race'],
+                            'class' => (int)$player['class'],
+                            'gender' => (int)$player['gender'],
+                            'level' => $player['level'],
+                            'side' => $this->Fraction((int) $player['race'])
                         );
                     }
                     $response['success'] = true;

@@ -35,14 +35,14 @@
 
             foreach ($playersData as $key => $player) {
                 $topPlayers[$key] = array(
-                    'Guid' => $player['guid'],
-                    'Name' => $player['name'],
-                    'Race' => (int)$player['race'],
-                    'Class' => (int)$player['class'],
-                    'Gender' => (int)$player['gender'],
-                    'Level' => $player['level'],
-                    'Totaltime' => $this->totalTime($player['totaltime']),
-                    'Total_achieve_points' => $player['total_achieve_points']
+                    'guid' => $player['guid'],
+                    'name' => $player['name'],
+                    'race' => (int)$player['race'],
+                    'class' => (int)$player['class'],
+                    'gender' => (int)$player['gender'],
+                    'level' => $player['level'],
+                    'total_time' => $this->totalTime($player['totaltime']),
+                    'total_achieve_points' => $player['total_achieve_points']
                 );
             }
 
@@ -102,14 +102,14 @@
 
             foreach ($playersData as $key => $player) {
                 $recentAchievements[$key] = array(
-                    'Guid' => $player['guid'],
-                    'Name' => $player['name'],
-                    'Race' => (int)$player['race'],
-                    'Class' => (int)$player['class'],
-                    'Gender' => (int)$player['gender'],
-                    'Level' => $player['level'],
-                    'Achievement_description' => $player['achievement_description'],
-                    'Achievement_date' => $player['achievement_date']
+                    'guid' => $player['guid'],
+                    'name' => $player['name'],
+                    'race' => (int)$player['race'],
+                    'class' => (int)$player['class'],
+                    'gender' => (int)$player['gender'],
+                    'level' => $player['level'],
+                    'achievement_description' => $player['achievement_description'],
+                    'achievement_date' => $player['achievement_date']
                 );
             }
 

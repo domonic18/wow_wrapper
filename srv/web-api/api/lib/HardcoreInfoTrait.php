@@ -70,14 +70,14 @@
         protected function processPlayerData($player) {
             //$class = $this->ClassState($player['class']);
             return array(
-                'Guid' => $player['guid'],
-                'Name' => $this->checkAndReplacePlayerName($player['name']),
-                'Race' => (int)$player['race'],
-                'Class' => ((int)$player['class']),
-                'Gender' => ((int)$player['gender']),
-                'Level' => $player['character_level'],
-                'Side' => $this->Fraction((int) $player['race']),
-                'TotalSpentTime' => $this->totalTime($player['total_spent_time'])
+                'guid' => $player['guid'],
+                'name' => $this->checkAndReplacePlayerName($player['name']),
+                'race' => (int)$player['race'],
+                'class' => ((int)$player['class']),
+                'gender' => ((int)$player['gender']),
+                'level' => $player['character_level'],
+                'side' => $this->Fraction((int) $player['race']),
+                'total_spent_time' => $this->totalTime($player['total_spent_time'])
             );
         }
 
