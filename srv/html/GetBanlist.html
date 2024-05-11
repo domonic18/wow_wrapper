@@ -27,10 +27,6 @@
       color: #777;
     }
 
-    table.dataTable tbody td {
-      text-align: left; /* 强制左对齐 */
-    }
-    
   </style>
 </head>
 <body>
@@ -64,21 +60,21 @@
 
       switch (tabId) {
         case 'recent_ban_list':
-          columns.push({ title: '用户名', className: 'text-left' });
-          columns.push({ title: 'IP地址', className: 'text-left' });
-          columns.push({ title: '封号原因', className: 'text-left' });
-          columns.push({ title: '封号日期', className: 'text-left' });
+          columns.push({ title: '用户名', className: 'dt-body-left' });
+          columns.push({ title: 'IP地址', className: 'dt-body-left' });
+          columns.push({ title: '封号原因', className: 'dt-body-left' });
+          columns.push({ title: '封号日期', className: 'dt-body-left' });
           break;
         default:
           title = '点数';
-          columns.push({ title: '名字', className: 'text-left' });
-          columns.push({ title: '级别', className: 'text-left' });
-          columns.push({ title: '职业', className: 'text-left' });
-          columns.push({ title: '种族', className: 'text-left' });
+          columns.push({ title: '名字', className: 'dt-body-left' });
+          columns.push({ title: '级别', className: 'dt-body-left' });
+          columns.push({ title: '职业', className: 'dt-body-left' });
+          columns.push({ title: '种族', className: 'dt-body-left' });
           if (title !== '') {
-            columns.push({ title: title, className: 'text-left' });
+            columns.push({ title: title, className: 'dt-body-left' });
           }
-          columns.push({ title: '游戏时间', className: 'text-left' });
+          columns.push({ title: '游戏时间', className: 'dt-body-left' });
           break;
       }
 
@@ -89,6 +85,12 @@
           pageLength: 50,
           ordering: false,
           processing: true, // 启用处理指示器
+          columnDefs: [
+            {
+              targets: '.dt-type-numeric', // 目标为具有 dt-type-numeric 类名的列
+              className: 'dt-body-left' // 强制左对齐
+            }
+          ],
           language: {
             "processing": "数据加载中，请稍候...", // 自定义加载文本
             "sProcessing": "处理中...",
