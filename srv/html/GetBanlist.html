@@ -26,6 +26,11 @@
       margin-top: 9px;
       color: #777;
     }
+
+    table.dataTable tbody td {
+      text-align: left; /* 强制左对齐 */
+    }
+    
   </style>
 </head>
 <body>
@@ -83,7 +88,9 @@
           autoWidth: true,
           pageLength: 50,
           ordering: false,
+          processing: true, // 启用处理指示器
           language: {
+            "processing": "数据加载中，请稍候...", // 自定义加载文本
             "sProcessing": "处理中...",
             "sLengthMenu": "显示 _MENU_ 项结果",
             "sZeroRecords": "没有匹配结果",
