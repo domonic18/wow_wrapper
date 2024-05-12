@@ -89,7 +89,7 @@
                 INNER JOIN 
                     acore_world.achievement_dbc AS ad ON ca.achievement = ad.ID
                 ORDER BY ca.date DESC
-                LIMIT 100
+                LIMIT 50
             ";
 
             $result = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
