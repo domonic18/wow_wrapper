@@ -14,8 +14,8 @@ ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/do
 # step2
 # COPY ./install/install-php-extensions /usr/local/bin/
 
-#RUN sed -i "s#http://deb.debian.org#http://mirrors.aliyun.com#g" /etc/apt/sources.list && \
-RUN rm -rf /var/lib/apt/lists/* && \
+RUN sed -i "s#http://deb.debian.org#http://cdn-fastly.deb.debian.org#g" /etc/apt/sources.list && \
+    rm -rf /var/lib/apt/lists/* && \
     chmod +x /usr/local/bin/install-php-extensions && \
     apt-get update && \
     apt-get install -y cron curl telnet inetutils-ping git zlib1g-dev nginx supervisor  libzip-dev unzip procps sudo vim rsyslog && \
