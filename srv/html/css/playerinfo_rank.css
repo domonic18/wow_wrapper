@@ -1,0 +1,12 @@
+.money-image {
+  width: 8px;
+  height: 8px;
+}
+.faction-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.armory_name {
+  text-decoration: none; /* 去掉特定超链接的下划线 */
+}

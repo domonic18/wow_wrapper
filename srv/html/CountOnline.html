@@ -3,81 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="lib/bootstrap-5.3.3-dist/css/bootstrap.min.css">
-  <style>
-    .online-players {
-      font-size: 12px;
-    }
-
-    .online-players-title {
-      margin-bottom: 5px;
-      display: flex; /* 使用 flex 布局 */
-      align-items: center; /* 垂直居中对齐 */
-    }
-
-    .online-players-title h3 {
-      font-size: 16px;
-      margin: 0;
-      color: #F1B132; /* 颜色为#F1B132 */
-    }
-
-    .online-players-title span {
-      color: green;
-      margin-left: 10px;
-    }
-
-    .online-players .label {
-      display: inline-block;
-      width: 80px;
-      text-align: left;
-    }
-
-    .online-players .count {
-      display: inline-block;
-      width: 50px;
-    }
-
-    .online-players .bar-container {
-      display: inline-block;
-      width: 200px;
-      height: 10px;
-      margin-left: 5px;
-      background-color: rgba(0, 0, 0, 0.1);
-      border-radius: 5px;
-      overflow: hidden;
-    }
-
-    .online-players .bar {
-      height: 10px;
-      transition: width 0.5s ease-in-out;
-    }
-
-    .label {
-      color: white; /* 设置字体颜色为白色 */
-    }
-
-    .online-players .alliance-players .bar {
-      background-color: #69a2ff;
-    }
-
-    .online-players .horde-players .bar {
-      background-color: #ff6961;
-    }
-
-    .total-players {
-      margin-top: 10px; /* 增加顶部间距 */
-    }
-
-    .online-total-count {
-      font-size: 12px; /* 设置字体大小 */
-      cursor: pointer; /* 鼠标指针样式为手型 */
-    }
-
-    .setting-details {
-      font-size: 12px; /* 设置字体大小为9px */
-      margin-left: 10px; /* 左边距为10px */
-      color: white; /* 设置字体颜色为白色 */
-    }
-  </style>
+  <link rel="stylesheet" type="text/css" href="css/common_datable.css">
 </head>
 <body>
 <div class="online-players">
@@ -103,7 +29,6 @@
     </div>
   </div>
   <div class="total-players">
-<!--    <span class="label">在线总人数：</span>-->
     <span>共计 <a href="#" target="_blank" class="online-total-count">0</a> 人在线</span>
   </div>
 </div>
@@ -116,7 +41,6 @@
       if (xhr.readyState === XMLHttpRequest.DONE) {
         if (xhr.status === 200) {
           var response = JSON.parse(xhr.responseText);
-          // document.getElementById("total-count").innerHTML = response.data.total_count;
           document.getElementById("alliance-count").innerHTML = response.data.alliance_count;
           document.getElementById("horde-count").innerHTML = response.data.horde_count;
           document.getElementById("alliance-bar").style.width = (response.data.alliance_count / response.data.total_count) * 100 + '%';

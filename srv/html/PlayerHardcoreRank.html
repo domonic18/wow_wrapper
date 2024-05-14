@@ -6,31 +6,7 @@
   <!-- 引入必要的库文件 -->
   <link rel="stylesheet" href="lib/bootstrap-5.3.3-dist/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="lib/DataTables/datatables.min.css">
-  <style>
-    /* 添加单元格边框样式 */
-    table.dataTable {
-      border-collapse: collapse;
-      width: 100%;
-    }
-
-    .race-image {
-      width: 16px;
-      height: 16px;
-    }
-    .class-image {
-      width: 16px;
-      height: 16px;
-    }
-    .refresh-text {
-      text-align: center;
-      margin-top: 9px;
-      color: #777;
-    }
-
-    .dt-processing.card {
-      top: 30%;
-    }
-  </style>
+  <link rel="stylesheet" type="text/css" href="css/common_datable.css">
 </head>
 <body>
 <div class="container">
@@ -56,7 +32,7 @@
   <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade" id="hardcore_completed_60" role="tabpanel">
       <!-- 为每个Tab面板添加独立的<table>元素 -->
-      <table id="table-hardcore_completed-60" class="display dataTable">
+      <table id="table-hardcore_completed-60" class="stripe hover row-border">
         <!-- 表格标题和内容 -->
       </table>
     </div>
@@ -71,8 +47,8 @@
     <div class="tab-pane fade" id="hardcore_incompleted" role="tabpanel">
       <table id="table-hardcore_incompleted" class="display dataTable">
       </table>
-      <div class="refresh-text">排行榜数据每5分钟刷新一次</div>
     </div>
+    <div class="refresh-text">排行榜数据每5分钟刷新一次</div>
   </div>
 </div>
 
@@ -106,10 +82,10 @@
       }
 
       columns.push({ title: '名字', className: 'text-left' });
-      columns.push({ title: title, className: 'text-left' });
-      columns.push({ title: '职业', className: 'text-left' });
-      columns.push({ title: '种族', className: 'text-left' });
-      columns.push({ title: '游戏时间', className: 'text-left' });
+      columns.push({ title: title, className: 'dt-right' });
+      columns.push({ title: '职业', className: 'dt-right' });
+      columns.push({ title: '种族', className: 'dt-right' });
+      columns.push({ title: '游戏时间', className: 'dt-right' });
 
       $.fn.dataTable.ext.errMode = 'none'; // 禁用所有DataTable的警告对话框
 

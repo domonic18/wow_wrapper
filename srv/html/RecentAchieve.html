@@ -5,67 +5,8 @@
     <title>RecentAchieve</title>
     <!-- 引入必要的库文件 -->
     <link rel="stylesheet" href="lib/bootstrap-5.3.3-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/recent_achieve.css">
 </head>
-<style>
-    .timeline {
-        list-style: none; /* 去除默认的列表项目符号 */
-        padding-left: 0; /* 去除默认的左填充 */
-        position: relative;
-    }
-
-    .date-separator {
-        font-weight: bold;
-        color: #FD5901FF; /* 日期分隔符的颜色 */
-        font-size: 16px; /* 日期字体大小 */
-        margin-top: 10px;
-        margin-bottom: 10px; /* 增加底部外边距，确保有足够空间显示连接线 */
-        margin-left: 10px; /* 日期分隔符的缩进 */
-        list-style: none; /* 去掉日期左侧的点 */
-        position: relative;
-        display: flex; /* 使用 Flexbox 布局 */
-        align-items: center; /* 垂直居中对齐 */
-    }
-
-    /* 为日期添加圆点 */
-    .date-separator::before {
-        content: '';
-        position: absolute;
-        left: -20px; /* 调整圆点位置，使其居中显示 */
-        top: 50%; /* 垂直居中 */
-        transform: translateY(-50%); /* 调整垂直居中对齐 */
-        width: 10px; /* 圆点宽度 */
-        height: 10px; /* 圆点高度 */
-        border-radius: 50%;
-        background-color: #FD5901FF; /* 圆点颜色 */
-    }
-
-    /* 修改此处以添加竖直连接线 */
-    .timeline::before {
-        content: '';
-        position: absolute;
-        left: -5px; /* 调整连接线位置，使其与圆点中心对齐 */
-        top: 0;
-        bottom: -20px; /* 调整连接线长度，确保它从一个日期延伸到下一个日期 */
-        width: 1px; /* 连接线宽度 */
-        background-color: #FD5901FF; /* 连接线颜色 */
-    }
-
-    /* 成就事件的样式，去除左侧的点和任何特殊标记 */
-    .achievement {
-        margin-top: 5px;
-        font-size: 12px; /* 日期字体大小 */
-    }
-
-    .player-name {
-        font-weight: bold;
-        color: #007bff; /* 玩家名字的颜色改为蓝色 */
-    }
-
-    .achievement-description {
-        font-weight: bold;
-        color: #FFD700; /* 成就描述的颜色和加粗 */
-    }
-</style>
 <body>
 <div class="container">
     <div class="row">

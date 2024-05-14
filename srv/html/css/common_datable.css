@@ -1,0 +1,27 @@
+/* 添加单元格边框样式 */
+table.dataTable {
+  border-collapse: collapse;
+  width: 100%;
+}
+.race-image {
+  width: 16px;
+  height: 16px;
+}
+.class-image {
+  width: 16px;
+  height: 16px;
+}
+
+.refresh-text {
+  text-align: center;
+  margin-top: 9px;
+  color: #777;
+}
+
+.dt-processing.card {
+  top: 30%;
+}
+
+.armory_name {
+  text-decoration: none; /* 去掉特定超链接的下划线 */
+}

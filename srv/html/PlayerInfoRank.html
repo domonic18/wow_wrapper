@@ -6,40 +6,8 @@
   <!-- 引入必要的库文件 -->
   <link rel="stylesheet" href="lib/bootstrap-5.3.3-dist/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="lib/DataTables/datatables.min.css">
-  <style>
-    /* 添加单元格边框样式 */
-    table.dataTable {
-      border-collapse: collapse;
-      width: 100%;
-    }
-
-    .race-image {
-      width: 16px;
-      height: 16px;
-    }
-    .class-image {
-      width: 16px;
-      height: 16px;
-    }
-    .money-image {
-      width: 8px;
-      height: 8px;
-    }
-    .faction-icon {
-      width: 16px;
-      height: 16px;
-    }
-
-    .refresh-text {
-      text-align: center;
-      margin-top: 9px;
-      color: #777;
-    }
-
-    .dt-processing.card {
-      top: 30%;
-    }
-  </style>
+  <link rel="stylesheet" type="text/css" href="css/common_datable.css">
+  <link rel="stylesheet" type="text/css" href="css/playerinfo_rank.css">
 </head>
 <body>
 <div class="container">
@@ -61,7 +29,7 @@
     </li>
   </ul>
 
-  <div class="tab-content" id="myTabContent">
+  <div class="tab-content" id="myTabContent" class="stripe hover row-border">
     <div class="tab-pane fade" id="top_achievement" role="tabpanel">
       <!-- 为每个Tab面板添加独立的<table>元素 -->
       <table id="table-top_achievement" class="display dataTable">
