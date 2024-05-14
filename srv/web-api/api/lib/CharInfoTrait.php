@@ -381,10 +381,12 @@
         LEFT JOIN 
             account 
         ON 
-            account_banned.id = account.id 
+            account_banned.id = account.id
+        WHERE 
+            account_banned.active = 1
         ORDER BY 
             account_banned.bandate DESC 
-        LIMIT 50";
+        LIMIT 200";
 
             return $db->query($query)->fetchAll(PDO::FETCH_ASSOC);
         }
