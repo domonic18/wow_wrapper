@@ -1,8 +1,8 @@
 <?php
 return array(
     'host' => '127.0.0.1',
-    'user' => 'db_admin',
-    'pass' => 'password',
+    'user' => 'acore',
+    'pass' => 'acore',
     'port' => '3306',
     'auth' => 'acore_auth',
     'news' => 'news',
