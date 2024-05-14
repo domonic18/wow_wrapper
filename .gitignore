@@ -7,3 +7,4 @@ logs/supervisor/php-stdout---supervisor-5UnfpO.log
 logs/supervisor/supervisord.log
 logs/supervisor/nginx-stderr---supervisor-_3UI_h.log
 logs/supervisor/nginx-stdout---supervisor-HKFakE.log
+/srv/.idea
