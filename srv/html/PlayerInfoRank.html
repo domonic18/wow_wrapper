@@ -241,7 +241,7 @@
       var rowData = [];
       switch (tab) {
         case 'top_achievement':
-          rowData = [character.name, character.level, classImage, raceImage, character.total_achieve_points];
+          rowData = [generateCharacterLink(character.name), character.level, classImage, raceImage, character.total_achieve_points];
           break;
         case 'top_honor':
           rowData = [character.name, character.level, classImage, raceImage, character.total_honor_points];
