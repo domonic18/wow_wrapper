@@ -83,5 +83,5 @@
 
   function generateCharacterLink(characterName) {
     var serverName = '阿拉希'; // 服务器名称
-    return `<a href="http://lokta.cn:48733/character/${serverName}/${characterName}/achievements">${characterName}</a>`;
+    return `<a href="http://lokta.cn:48733/character/${serverName}/${characterName}/achievements" class="armory_name">${characterName}</a>`;
   }
