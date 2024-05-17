@@ -29,7 +29,8 @@ $routes = [
     'recent_achieve' => 'getRecentAchievements',
     'top_honor' => 'getTopHonorPlayers',
     'top_gold' => 'getTopGoldPlayers',
-    'top_playtime' => 'getTopPlaytimePlayers'
+    'top_playtime' => 'getTopPlaytimePlayers',
+    'top_mount' => 'getTopMountPlayers'
 ];
 
 // 检查路由规则并调用相应的处理方法

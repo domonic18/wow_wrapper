@@ -11,6 +11,7 @@ class App {
     use AchievementTrait;
     use HonorTrait;
     use PlayerInfoTrait;
+    use PlayerMountTrait;
 //    use NewsInfoTrait;
 
 
