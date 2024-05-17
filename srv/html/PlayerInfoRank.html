@@ -13,16 +13,19 @@
 <div class="container">
   <ul class="nav nav-tabs justify-content-center" id="player_hardcore_rank_nav" role="tablist">
     <li class="nav-item">
-      <a class="nav-link" id="top_achievement-tab" data-bs-toggle="tab" href="#top_achievement" role="tab">成就排行榜</a>
+      <a class="nav-link" id="top_mount-tab" data-bs-toggle="tab" href="#top_mount" role="tab">坐骑排行</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" id="top_honor-tab" data-bs-toggle="tab" href="#top_honor" role="tab">荣誉排行榜</a>
+      <a class="nav-link" id="top_achievement-tab" data-bs-toggle="tab" href="#top_achievement" role="tab">成就排行</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" id="top_gold-tab" data-bs-toggle="tab" href="#top_gold" role="tab">金币排行榜</a>
+      <a class="nav-link" id="top_honor-tab" data-bs-toggle="tab" href="#top_honor" role="tab">荣誉排行</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" id="top_playtime-tab" data-bs-toggle="tab" href="#top_playtime" role="tab">游戏时长排行榜</a>
+      <a class="nav-link" id="top_gold-tab" data-bs-toggle="tab" href="#top_gold" role="tab">金币排行</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="top_playtime-tab" data-bs-toggle="tab" href="#top_playtime" role="tab">游戏时长</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" id="online_player-tab" data-bs-toggle="tab" href="#online_player" role="tab">在线玩家</a>
@@ -34,6 +37,10 @@
       <!-- 为每个Tab面板添加独立的<table>元素 -->
       <table id="table-top_achievement" class="display dataTable">
         <!-- 表格标题和内容 -->
+      </table>
+    </div>
+    <div class="tab-pane fade" id="top_mount" role="tabpanel">
+      <table id="table-top_mount" class="display dataTable">
       </table>
     </div>
     <div class="tab-pane fade" id="top_honor" role="tabpanel">
@@ -72,6 +79,14 @@
       switch (tabId) {
         case 'top_achievement':
           title = '成就点数';
+          columns.push({ title: '名字', className: 'text-left' });
+          columns.push({ title: '级别', className: 'text-left' });
+          columns.push({ title: '职业', className: 'text-left' });
+          columns.push({ title: '种族', className: 'text-left' });
+          columns.push({ title: title, className: 'text-left' });
+          break;
+        case 'top_mount':
+          title = '坐骑个数';
           columns.push({ title: '名字', className: 'text-left' });
           columns.push({ title: '级别', className: 'text-left' });
           columns.push({ title: '职业', className: 'text-left' });
@@ -214,6 +229,9 @@
       switch (tab) {
         case 'top_achievement':
           rowData = [generateCharacterLink(character.name), character.level, classImage, raceImage, character.total_achieve_points];
+          break;
+        case 'top_mount':
+          rowData = [character.name, character.level, classImage, raceImage, character.total_mount_counts];
           break;
         case 'top_honor':
           rowData = [character.name, character.level, classImage, raceImage, character.total_honor_points];
